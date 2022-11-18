@@ -1,140 +1,111 @@
-#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      llafin
-#
-# Created:     14/11/2022
-# Copyright:   (c) llafin 2022
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
+# on importe la fonction random
+# Debut
+# on créé la classe morpion
 
-import random
+    #on définit la fonction init
+        #on créé l'objet tableau
 
+    # on définit la fonction creer_tableau qui prends en paramètre l'objet tableau 
+        #pour i de 0 à 3
+            #on crée le tableau ligne
+            #pour j de 0 à 3
+                #on ajoute le caractère '-' au tableau ligne
+            #on ajoute le tableau ligne à tableau
+    
+    #on définit la fonction random_premier_joueur pour savoir quel joueur commence en premier
+        #on retourne la fonction random qui choisit aléatoirement entre 0 et 1
+    
+    #on définit une fonction mettre_signe qui prends en parametre l'objet tableau, la ligne, la colonne et le joueur
+        #si ligne est plus grand que 3 et colonne est plus grand que 3
+            #alors on demande au joueur quel ligne et quel colonne il choisit et on les stocke dans les variables ligne et colonne
+        #sinon
+            #alors on ajoute le signe au coordonnées choisient
 
-class morpion:
+    #on définit la fonction victoire_joueur qui prends en parametre le tableau
+        #win est égal à None
+        #n est égal à longueur de tableau 
 
-    def __init__(self):
-        self.tableau = []
+        #on regarde les lignes
+        #pour i de 0 à n
+            #win est égale à True
+            #pour j de 0 à n
+                #si tableau aux coordonées i et j est différent de player
+                    #alors win est égal à False
+            #si win est égal à True
+                #alors on retourne win
+        
+        #on regarde les colonnes
+        #pour i de 0 à n
+            #win est égale à True
+            #pour j de 0 à n
+                #si tableau aux coordonées j et i est différent de player
+                    #alors win est égal à False
+            #si win est égal à True
+                #alors on retourne win
+        
+        #on regarde les diagonales
+        #win est égale à True
+        #pour i de 0 à n
+            #si tableau aux coordonées i et i est différent de player
+                    #alors win est égal à False
+        #si win est égal à True
+            #alors on retourne win
+        #win est égale à True
+        #pour i de 0 à n
+            #si tableau aux coordonées i et n-1-i est différent de player
+                    #alors win est égal à False
+        #si win est égal à True
+            #alors on retourne win
+        #on retourne False
+        #pour ligne dans tableau
+            #pour item dans ligne
+                #si item est égal à '-'
+                    #alors on retourne False
+        #retourne True
 
-    def creer_tableau(self):
-        for i in range(3):
-            ligne = []
-            for j in range(3):
-                ligne.append('-')
-            self.tableau.append(ligne)
+        #on définit la fonction tableau_remplit qui prendt en parametre le tableau
+            #pour ligne dans tableau
+                #pour item dans ligne
+                    #si item est égal à '-'
+                        #alors on retourne False
+            #on retourne True
 
-    def random_premier_joueur(self):
-        return random.randint(0, 1)
+        #on définit la fonction tour_joueur_suivant qui prendt en parametre un tableau et un joueur
+            #on retourne x si player est égal à 0 sinon on retourne 0
 
-    def mettre_signe(self, ligne, colonne, player):
-        if ligne>3 or colonne>3:
-             ligne, colonne = list(
-                map(int, input("Entrer la ligne et la colonne ").split()))
-        else:
+        #on définit la fonction afficher_tableau avec en parametre tableau
+            #pour ligne dans tableau
+                #pour item dans ligne
+                    #afficher item
+        
+        #on définit la fonction start
+            #on appelle la fonction creer_tableau
+            # on tire au sort quel joueur va commencer à jouer en appelant la fonction random_premier_joueur
+            #Tant que True 
+                #afficher Tour du joueur x ou 0
+                #appeler la fonction afficher_tableau
+                # demander au joueur la postion de son signe
+                # mettre le signe aux bonnes coordonnées en appelant la fonction mettre_signe
+                # on regarde si un joueur a gagné
+                #si la fonction victoire_joueur est égal à True 
+                    #alors on affiche Joueur x ou 0 à gagné le match
+                #si la fonction tableau_remplit est égal à True
+                    #affiché Match Nul !                
+                # passer au tour suivant en appelant la fonction tour_joueur_suivant
+            #on affiche la tableau à la fin du match an appelant la fonction afficher_tableau
 
-            self.tableau[ligne][colonne] = player
-
-    def victoire_joueur(self, player):
-        win = None
-        n = len(self.tableau)
-
-        # on regarde les lignes
-        for i in range(n):
-            win = True
-            for j in range(n):
-                if self.tableau[i][j] != player:
-                    win = False
-                    break
-            if win:
-                return win
-
-        # on regarde les colonnes
-        for i in range(n):
-            win = True
-            for j in range(n):
-                if self.tableau[j][i] != player:
-                    win = False
-                    break
-            if win:
-                return win
-
-        # on regarde les diagonales
-        win = True
-        for i in range(n):
-            if self.tableau[i][i] != player:
-                win = False
-                break
-        if win:
-            return win
-        win = True
-
-        for i in range(n):
-            if self.tableau[i][n - 1 - i] != player:
-                win = False
-                break
-        if win:
-            return win
-        return False
-
-        for ligne in self.tableau:
-            for item in ligne:
-                if item == '-':
-                    return False
-        return True
-
-    def tableau_remplit(self):
-        for ligne in self.tableau:
-            for item in ligne:
-                if item == '-':
-                    return False
-        return True
-
-    def tour_joueur_suivant(self, player):
-        return 'X' if player == 'O' else 'O'
-
-    def afficher_tableau(self):
-        for ligne in self.tableau:
-            for item in ligne:
-                print(item, end=" ")
-            print()
-
-    def start(self):
-        self.creer_tableau()
-
-        # on tire au sort quel joueur va commencer à jouer
-        player = 'X' if self.random_premier_joueur() == 1 else 'O'
-        while True:
-            print(f"Tour du joueur {player} ")
-
-            self.afficher_tableau()
-
-            # demander au joueur la postion de son signe
-            ligne, colonne = list(
-                map(int, input("Entrer la ligne et la colonne ").split()))
-            print()
-
-            # mettre le signe aux bonnes coordonnées
-            self.mettre_signe(ligne - 1, colonne - 1, player)
-
-            # on regarde si un joueur a gagné
-            if self.victoire_joueur(player):
-                print(f"Joueur {player} à gagné le match!")
-                break
-
-            # on regarde si il y a match nul
-            if self.tableau_remplit():
-                print("Match nul!")
-                break
-
-            # passer au tour suivant
-            player = self.tour_joueur_suivant(player)
-
-        # on affiche le tableau à la fin du match
-        print()
-        self.afficher_tableau()
+#on commence le match
+#morpion est égal à morpion()
+#on éxecute la fonction start
+#Fin
+                
 
 
-# on commence le match
-morpion = morpion()
-morpion.start()
+
+
+        
+
+
+
+
+
