@@ -74,6 +74,16 @@
             #pour ligne dans tableau
                 #pour item dans ligne
                     #afficher item
+
+        #on définit la fonction tour_bot qui prendt en paramètre la ligne la colonne le player et le tour
+            #si tour est égal à 1
+                #alors si le joueur joue au milieu le bot joue en haut à gauche
+
+            #si tour est égal à 2
+                #alors si le joueur joue en bat à droite le bot joue en haut à droite
+
+            #si le tour esr égal à 3
+                #alors si le joueur joue en bas au milieu le bot joue en haut au milieu
         
         #on définit la fonction start
             #on appelle la fonction creer_tableau
